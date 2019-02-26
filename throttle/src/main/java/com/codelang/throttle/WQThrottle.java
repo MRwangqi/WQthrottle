@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author codelang
  * date on 2019/2/26.
@@ -12,35 +15,30 @@ public class WQThrottle {
     /**
      * default handler is MainHandler
      */
-    private Handler handler = HandlerFactory.create(HandlerType.MAIN_THREAD, null);
+    private Handler handler;
+    private List<CallBack> callBacks = new ArrayList<>();
 
     private WQThrottle() {
+        handler = HandlerFactory.create(HandlerType.MAIN_THREAD, callBacks);
     }
 
     private static class Inner {
         private static WQThrottle throttle = new WQThrottle();
     }
 
-
     //todo 1、初始化时需要确定该操作处于什么线程的
     //todo 2、实例.delay 开始启动延时，参数回调
-
-
     public static WQThrottle getInstance() {
         return Inner.throttle;
     }
 
     /**
-     * 初始化操作
+     * 注册操作
      *
-     * @param type     线程类型
      * @param callBack 参数回调
      */
-    public void init(@NonNull HandlerType type, CallBack callBack) {
-        if (type == null) {
-            throw new RuntimeException("WQThrottle init HandlerType must not be null");
-        }
-        handler = HandlerFactory.create(type, callBack);
+    public void register(CallBack callBack) {
+        callBacks.add(callBack);
     }
 
 
@@ -57,13 +55,21 @@ public class WQThrottle {
         handler.sendMessageDelayed(msg, timeMillis);
     }
 
+    /**
+     * 反注册，移除 callback 回调
+     *
+     * @param callBack
+     */
+    public void unregister(CallBack callBack) {
+        callBacks.remove(callBack);
+    }
 
     public interface CallBack {
         /**
          * @param tag 标识
          * @param obj 参数
          */
-        void delayResult(int tag, Object obj);
+        void throttleResult(int tag, Object obj);
     }
 }
 
