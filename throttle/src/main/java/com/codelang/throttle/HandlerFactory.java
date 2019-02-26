@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 
 /**
  * @author codelang
@@ -26,7 +27,7 @@ public class HandlerFactory {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (callBack != null)
-                    callBack.result(msg.what, msg.obj);
+                    callBack.delayResult(msg.what, msg.obj);
             }
         };
     }
@@ -39,7 +40,7 @@ public class HandlerFactory {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 if (callBack != null)
-                    callBack.result(msg.what, msg.obj);
+                    callBack.delayResult(msg.what, msg.obj);
             }
         };
     }

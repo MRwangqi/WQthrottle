@@ -26,7 +26,7 @@ public class WQThrottle {
     //todo 2、实例.delay 开始启动延时，参数回调
 
 
-    public WQThrottle getInstance() {
+    public static WQThrottle getInstance() {
         return Inner.throttle;
     }
 
@@ -53,15 +53,17 @@ public class WQThrottle {
         handler.removeMessages(tag);
         Message msg = handler.obtainMessage();
         msg.obj = params;
+        msg.what = tag;
         handler.sendMessageDelayed(msg, timeMillis);
     }
+
 
     public interface CallBack {
         /**
          * @param tag 标识
          * @param obj 参数
          */
-        void result(int tag, Object obj);
+        void delayResult(int tag, Object obj);
     }
 }
 
