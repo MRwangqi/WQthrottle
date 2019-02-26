@@ -3,30 +3,44 @@ package com.codelang.throttle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
+import android.os.Message;
 
 /**
  * @author codelang
  * date on 2019/2/26.
  */
 public class HandlerFactory {
-    static Handler create(HandlerType type) {
+    static Handler create(HandlerType type, WQThrottle.CallBack callBack) {
         switch (type) {
             case MAIN_THREAD:
-                return generateMainHandler();
+                return generateMainHandler(callBack);
             case THREAD:
-                return generateThreadHandler();
+                return generateThreadHandler(callBack);
         }
         return null;
     }
 
-    private static Handler generateMainHandler() {
-        return new Handler(Looper.getMainLooper());
+    private static Handler generateMainHandler(final WQThrottle.CallBack callBack) {
+        return new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (callBack != null)
+                    callBack.result(msg.what, msg.obj);
+            }
+        };
     }
 
-    private static Handler generateThreadHandler() {
+    private static Handler generateThreadHandler(final WQThrottle.CallBack callBack) {
         HandlerThread handlerThread = new HandlerThread("throttle");
-        Handler handle = new Handler(handlerThread.getLooper());
         handlerThread.start();
-        return handle;
+        return new Handler(handlerThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (callBack != null)
+                    callBack.result(msg.what, msg.obj);
+            }
+        };
     }
 }
