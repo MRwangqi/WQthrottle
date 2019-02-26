@@ -6,7 +6,7 @@ implementation 'com.codelang:wqthrottle:1.0.0'
 该库主要工作于去重处理，对于多次点击事件，在 delay 延时期间只触发一次，[应用场景](https://juejin.im/post/5b9a4f37f265da0a8b570e96)
 
 
-#Simple usage
+# Simple usage
 该库分为四个步骤:
 - 注册监听
 - 发送延迟消息
