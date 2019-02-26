@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="zan"
+        android:text="模拟点赞网络请求" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/main_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="edit textWatch 搜索场景" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openRecycleView"
+        android:text="recycleView 场景 示例" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="eventClick"
+        android:text="eventBus示例" />
+
+    <TextView
+        android:id="@+id/main_event_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="接收EventBus消息" />
+</LinearLayout>

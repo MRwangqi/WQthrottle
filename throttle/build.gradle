@@ -1,0 +1,45 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release' // 添加bintray插件
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+}
+publish {
+    userOrg = 'codelang-organization'             // Binary用户名
+    repoName = 'maven'          // Binary上的刚才新建的仓库名（Repository）
+    groupId = 'com.codelang'        // 依赖名compile 'x:y:z'中的包名x
+    artifactId = 'wqthrottle'        // 依赖名compile 'x:y:z'中的项目名y
+    publishVersion = '1.0.0'          // 依赖名compile 'x:y:z'中的版本号z
+    desc = 'Non intrusive frame'            // 对该开源组件的说明
+    website = 'https://github.com/MRwangqi/WQthrottle'  // VCS地址，即填写项目上传的Github地址
+}
