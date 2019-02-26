@@ -32,6 +32,16 @@ public class WQThrottle {
         return Inner.throttle;
     }
 
+
+    /**
+     * 切换线程
+     *
+     * @param type
+     */
+    public void init(HandlerType type) {
+        handler = HandlerFactory.create(type, callBacks);
+    }
+
     /**
      * 注册操作
      *
