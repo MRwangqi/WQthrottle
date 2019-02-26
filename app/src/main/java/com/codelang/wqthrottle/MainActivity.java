@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelang.throttle.HandlerType;
@@ -21,16 +22,22 @@ public class MainActivity extends AppCompatActivity implements WQThrottle.CallBa
 
     public static final int ZAN_TAG = 0x01;
     public static final int SEARCH_TAG = 0x02;
+    public static final int EVENT_TAG = 0x03;
+
+    TextView txEventMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        txEventMsg = findViewById(R.id.main_event_msg);
+
         AppCompatEditText editText = findViewById(R.id.main_edit);
+
         registerTextWatcher(editText);
         //初始化
-        WQThrottle.getInstance().register( this);
+        WQThrottle.getInstance().register(this);
     }
 
 
@@ -53,6 +60,12 @@ public class MainActivity extends AppCompatActivity implements WQThrottle.CallBa
     public void openRecycleView(View view) {
         startActivity(new Intent(this, RecyclerActivity.class));
     }
+
+    public void eventClick(View view){
+        startActivity(new Intent(this, EventActivity.class));
+    }
+
+
 
     /**
      * editText 搜索场景
@@ -94,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements WQThrottle.CallBa
             case SEARCH_TAG:
                 CharSequence s = (CharSequence) obj;
                 Toast.makeText(this, "搜索回应，参数值为" + (s.toString()), Toast.LENGTH_SHORT).show();
+                break;
+            case EVENT_TAG:
+                txEventMsg.setText((String) obj);
                 break;
         }
     }
