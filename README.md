@@ -45,4 +45,4 @@ WQThrottle.getInstance().unregister(this);
 
 # Screen
 
-![]("screen.gif")
+![](screen.gif)
