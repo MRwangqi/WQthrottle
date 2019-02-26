@@ -99,4 +99,9 @@ public class MainActivity extends AppCompatActivity implements WQThrottle.CallBa
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        WQThrottle.getInstance().unregister(this);
+    }
 }
