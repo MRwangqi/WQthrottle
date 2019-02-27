@@ -1,4 +1,7 @@
 # Adding to project
+<dependency org='com.codelang' name='wqthrottle' rev='1.0.0'>
+  <artifact name='wqthrottle' ext='pom' ></artifact>
+</dependency>
 ```
 implementation 'com.codelang:wqthrottle:1.0.0'
 ```
