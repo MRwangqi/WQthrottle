@@ -1,6 +1,4 @@
-<dependency org='com.codelang' name='wqthrottle' rev='1.0.0'>
-  <artifact name='wqthrottle' ext='pom' ></artifact>
-</dependency>
+ [ ![Download](https://api.bintray.com/packages/codelang-organization/maven/wqthrottle/images/download.svg?version=1.0.0) ](https://bintray.com/codelang-organization/maven/wqthrottle/1.0.0/link)
 
 # Adding to project
 
